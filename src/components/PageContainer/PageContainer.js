@@ -35,7 +35,7 @@ export default function PageContainer() {
       await setImage(img);
     };
     if (currentPage !== undefined) {
-      setImg();
+      setImg("");
     }
   }, [currentPage, pageImage]);
 
@@ -45,8 +45,12 @@ export default function PageContainer() {
     return (
       <div className="login__container">
         <div className="login__card">
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
+          <Link to="/login" className="login__link">
+            {"> "}Login
+          </Link>
+          <Link to="/signup" className="login__link">
+            {"> "}Signup
+          </Link>
         </div>
       </div>
     );
@@ -59,7 +63,7 @@ export default function PageContainer() {
   }
   return (
     <div id="container" className="game__container">
-      <SkillContainer />
+      <SkillContainer currentPage={currentPage} />
       <PlayContainer setServer={setServer} />
       <ServerContainer
         servers={servers}

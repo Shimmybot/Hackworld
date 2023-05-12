@@ -2,9 +2,44 @@ import { useEffect, useState } from "react";
 import "./skillContainer.scss";
 import axios from "axios";
 
-export default function SkillContainer() {
+export default function SkillContainer({ currentPage }) {
   const [skills, setSkills] = useState([]);
-  const handleSkill = () => {};
+  const [attacking, setAttacking] = useState(false);
+  const [usedSkill, setSkill] = useState();
+
+  const handleSkill = (event) => {
+    setSkill(event.target.textContent);
+    setAttacking(true);
+  };
+
+  useEffect(() => {
+    console.log(usedSkill);
+    console.log(attacking);
+    if (attacking === true) {
+      const damage = skills.find(
+        (element) => element.skill_name === usedSkill
+      ).damage;
+      axios
+        .post(
+          `http://localhost:8080/api/servers/${currentPage.id}`,
+          {
+            damage: damage,
+          },
+
+          {
+            headers: {
+              authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
+            },
+          }
+        )
+        .then((result) => {
+          console.log(result);
+        });
+    }
+    setSkill("");
+    setAttacking(false);
+  }, [attacking]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/users/skills`, {
@@ -13,7 +48,6 @@ export default function SkillContainer() {
         },
       })
       .then((response) => {
-        console.log(response.data);
         const tmpSkills = [skills, ...response.data];
         tmpSkills.shift();
         setSkills(tmpSkills);
@@ -26,7 +60,7 @@ export default function SkillContainer() {
         <ul className="skill__list">
           {skills.map((element) => {
             return (
-              <li>
+              <li key={element.id}>
                 <div onClick={handleSkill}>{element.skill_name}</div>
               </li>
             );

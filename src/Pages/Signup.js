@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./signup.scss";
 
 export default function Signup() {
   const form = useRef();
@@ -23,12 +24,12 @@ export default function Signup() {
       });
   };
   return (
-    <div>
-      <form ref={form} onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input name="username" />
-        <label>Password</label>
-        <input name="password" type="password" />
+    <div className="signup__container">
+      <form ref={form} onSubmit={handleSubmit} className="signup__card">
+        <label className="signup__label">Username</label>
+        <input name="username" className="signup__field" />
+        <label className="signup__label">Password</label>
+        <input name="password" type="password" className="signup__field" />
         <button type="submit">Signup</button>
       </form>
     </div>

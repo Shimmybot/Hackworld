@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./login.scss";
 
 export default function Login() {
   const form = useRef();
@@ -16,15 +17,18 @@ export default function Login() {
       .then((response) => {
         sessionStorage.setItem("loginToken", response.data.token);
         navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
   return (
-    <div>
-      <form ref={form} onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input name="username" />
-        <label>Password</label>
-        <input name="password" type="password" />
+    <div className="login__container">
+      <form ref={form} onSubmit={handleSubmit} className="login__card">
+        <label className="login__label">{">"}Username</label>
+        <input name="username" className="login__field" />
+        <label className="login__label">{">"}Password</label>
+        <input name="password" type="password" className="login__field" />
         <button type="submit">Login</button>
       </form>
     </div>
