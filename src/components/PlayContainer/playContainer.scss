@@ -1,0 +1,13 @@
+.play {
+  &__container {
+    width: 70%;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+  &__button {
+    width: 10rem;
+    margin: 25rem auto;
+  }
+}
