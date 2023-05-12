@@ -1,4 +1,9 @@
-.skill__container {
-  background-color: white;
-  width: 15%;
+.skill {
+  &__container {
+    background-color: white;
+    width: 15%;
+  }
+  &__list {
+    list-style-type: none;
+  }
 }

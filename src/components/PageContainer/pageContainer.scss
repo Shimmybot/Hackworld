@@ -1,6 +1,17 @@
-.game__container {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  background-size: cover;
+.login {
+  &__container {
+  }
+  &__card {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.game {
+  &__container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-size: cover;
+  }
 }

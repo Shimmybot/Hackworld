@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./serverContainer.scss";
 
-export default function ServerContainer({ servers, setServer }) {
+export default function ServerContainer({ servers, setServer, currentPage }) {
   const [currentServer, setCurrent] = useState();
   const clickHandler = (event) => {
     const id = event.target.parentElement.id;
@@ -9,10 +9,18 @@ export default function ServerContainer({ servers, setServer }) {
     setCurrent(server);
     setServer(server);
   };
+
   useEffect(() => {
-    setCurrent(servers[0]);
+    if (currentPage !== undefined) {
+      setCurrent(currentPage);
+    } else {
+      setCurrent(servers[0]);
+    }
   }, []);
 
+  useEffect(() => {
+    setCurrent(currentPage);
+  }, [currentPage]);
   if (currentServer !== undefined) {
     return (
       <div className="servers__container">

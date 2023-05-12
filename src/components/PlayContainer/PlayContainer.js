@@ -16,13 +16,13 @@ export default function PlayContainer({ setServer }) {
     axios
       .post("http://localhost:8080/api/servers", { url: url })
       .then((response) => {
-        console.log(response);
-        if (response.data) setServer(response.data);
-        setError("");
+        if (response.data) {
+          setServer(response.data);
+          setError("");
+        }
       })
       .catch((err) => {
         setError(err.code);
-        console.log(err);
       });
   };
   return (
@@ -30,7 +30,7 @@ export default function PlayContainer({ setServer }) {
       <form className="play__form" onSubmit={submitHandler}>
         <input name="url" placeholder="http://" />
         <button className="play__button"> {">"}Analyze</button>
-        <p>{error}</p>
+        <p className="error">{error}</p>
       </form>
     </div>
   );

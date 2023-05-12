@@ -30,17 +30,24 @@ export default function PageContainer() {
     setPage(server);
   };
   useEffect(() => {
-    if (currentPage !== undefined) {
+    const setImg = async () => {
       const img = `http://localhost:8080/images/${currentPage.id}.png`;
-      setImage(img);
+      await setImage(img);
+    };
+    if (currentPage !== undefined) {
+      setImg();
     }
   }, [currentPage, pageImage]);
 
+  const update = () => {};
+
   if (sessionStorage.getItem("loginToken") === null) {
     return (
-      <div className="login--container">
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
+      <div className="login__container">
+        <div className="login__card">
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
+        </div>
       </div>
     );
   }
@@ -54,7 +61,11 @@ export default function PageContainer() {
     <div id="container" className="game__container">
       <SkillContainer />
       <PlayContainer setServer={setServer} />
-      <ServerContainer servers={servers} setServer={setServer} />
+      <ServerContainer
+        servers={servers}
+        currentPage={currentPage}
+        setServer={setServer}
+      />
     </div>
   );
 }
