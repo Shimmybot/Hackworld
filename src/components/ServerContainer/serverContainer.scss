@@ -3,7 +3,7 @@
 
 .servers {
   &__container {
-    background-color: black;
+    display: flex;
     width: 15%;
     color: #38a83a;
     @include glow;
