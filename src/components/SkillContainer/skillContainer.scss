@@ -6,6 +6,8 @@
     display: block;
     background-color: black;
     width: 100%;
+    padding: 1.5rem;
+    border-radius: 4px;
   }
   &--closed {
     display: none;
@@ -17,15 +19,25 @@
     display: flex;
     color: #38a83a;
     width: 15%;
-    @include glow;
+    @include glowGreen;
   }
   &__list {
     list-style-type: none;
+    padding: 0.5rem 0;
   }
 }
 
-.sidebar__button {
-  @include sidebar__button;
+.sidebar__button--left {
+  @include sidebar__buttonLeft;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.sidebar__button--right {
+  @include sidebar__buttonRight;
   background-color: black;
   display: flex;
   justify-content: center;

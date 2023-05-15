@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./skillContainer.scss";
 import axios from "axios";
 
-export default function SkillContainer({ currentPage }) {
+export default function SkillContainer({ currentPage, update }) {
   const [skills, setSkills] = useState([]);
   const [attacking, setAttacking] = useState(false);
   const [usedSkill, setSkill] = useState();
@@ -12,6 +12,7 @@ export default function SkillContainer({ currentPage }) {
   const handleSkill = (event) => {
     setSkill(event.target.textContent);
     setAttacking(true);
+    update(true);
   };
   const sidebarHandler = (event) => {
     if (sidebarState) {
@@ -80,7 +81,7 @@ export default function SkillContainer({ currentPage }) {
             })}
           </ul>
         </div>
-        <div className="sidebar__button" onClick={sidebarHandler}>
+        <div className="sidebar__button--right" onClick={sidebarHandler}>
           {buttonState}
         </div>
       </div>

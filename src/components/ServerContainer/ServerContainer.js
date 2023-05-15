@@ -40,7 +40,9 @@ export default function ServerContainer({ servers, setServer, currentPage }) {
   if (currentServer !== undefined) {
     return (
       <div className="servers__container">
-        <div className="sidebar__button" onClick={sidebarHandler}>{buttonState}</div>
+        <div className="sidebar__button--left" onClick={sidebarHandler}>
+          {buttonState}
+        </div>
         <div className="list__container--open" ref={sidebar}>
           <div className="servers__owned">
             <h3 className="servers__owned--title">Owned Servers:</h3>
@@ -70,7 +72,9 @@ export default function ServerContainer({ servers, setServer, currentPage }) {
   } else {
     return (
       <div className="servers__container">
-        <div className="sidebar__button" onClick={sidebarHandler}>{buttonState}</div>
+        <div className="sidebar__button--left" onClick={sidebarHandler}>
+          {buttonState}
+        </div>
         <div className="list__container--open" ref={sidebar}>
           <div className="servers__owned">
             <h3 className="servers__owned--title">Owned Servers:</h3>

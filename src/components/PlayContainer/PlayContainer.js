@@ -28,9 +28,9 @@ export default function PlayContainer({ setServer }) {
   return (
     <div className="play__container">
       <form className="play__form" onSubmit={submitHandler}>
-        <input name="url" placeholder="http://" />
-        <button className="play__button"> {">"}Analyze</button>
-        <p className="error">{error}</p>
+        <input name="url" placeholder="http://" className="play__input" />
+        <button className="play__button">{">"}Analyze</button>
+        <p className="error">{error}</p> 
       </form>
     </div>
   );

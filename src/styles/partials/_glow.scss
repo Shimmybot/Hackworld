@@ -1,4 +1,7 @@
-@mixin glow {
-  text-align: center;
+@mixin glowGreen {
+  text-shadow: 0 0 10px #adff2f6e, 0px 0px 5px #adff2f6e;
+}
+
+@mixin glowRed {
   text-shadow: 0 0 10px #adff2f6e, 0px 0px 5px #adff2f6e;
 }

@@ -1,17 +1,32 @@
+@use "../../styles/partials/glow" as *;
+
 .play {
   &__container {
     width: 70%;
+    padding: 1rem;
   }
   &__form {
     display: flex;
     flex-direction: column;
   }
+  &__input {
+    background-color: black;
+    color: #38a83a;
+    @include glowGreen;
+    border-radius: 10px;
+  }
   &__button {
     width: 10rem;
     margin: 25rem auto;
+    background-color: black;
+    color: #38a83a;
+    @include glowGreen;
+    border-radius: 10px;
+    height: 2rem;
   }
 }
 .error {
   color: red;
   text-align: center;
+  @include glowRed;
 }

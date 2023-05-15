@@ -1,5 +1,13 @@
-@mixin sidebar__button {
+@mixin sidebar__buttonRight {
   width: 2rem;
   height: 2rem;
   background-color: black;
+  border-radius: 0 10px 10px 0;
+}
+
+@mixin sidebar__buttonLeft {
+  width: 2rem;
+  height: 2rem;
+  background-color: black;
+  border-radius: 10px 0 0 10px;
 }
