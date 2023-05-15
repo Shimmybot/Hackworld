@@ -1,7 +1,11 @@
+@use "../../styles/partials/glow" as *;
+
 .servers {
   &__container {
-    background-color: white;
+    background-color: black;
     width: 15%;
+    color: #38a83a;
+    @include glow;
   }
   &__list {
     text-decoration: none;

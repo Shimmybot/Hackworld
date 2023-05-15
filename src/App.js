@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PageContainer from "./components/PageContainer/PageContainer";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import "./app.scss";
 
 function App() {
   return (
