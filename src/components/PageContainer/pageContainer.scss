@@ -1,8 +1,58 @@
+@use "../../styles/partials/glow" as *;
+
 .game {
   &__container {
     display: flex;
     flex-direction: row;
     height: 100vh;
     background-size: cover;
+  }
+}
+
+.cursor {
+  color: #38a83a;
+  font-size: 4rem;
+  // width: 25rem;
+  padding: 0 2rem;
+  position: relative;
+  @include glowGreen;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    right: -1rem;
+    display: inline-block;
+    background-color: #38a83a;
+    vertical-align: top;
+    width: 2rem;
+
+    height: 4rem;
+
+    -webkit-animation: blink 1s step-end infinite;
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

@@ -1,0 +1,38 @@
+@use "../../styles/partials/glow" as *;
+.tutorial {
+  &__modal {
+    position: relative;
+    color: #38a83a;
+    @include glowGreen;
+    border: none;
+  }
+  &__header {
+    position: absolute;
+    background-color: black;
+    width: 20rem;
+    left: 0;
+    right: 0;
+    margin: 1rem auto;
+  }
+  &__description {
+    position: absolute;
+    background-color: black;
+    width: 32rem;
+    left: 0;
+    right: 0;
+    margin: 1rem auto;
+    top: 5rem;
+  }
+  &__skills {
+    position: absolute;
+    background-color: black;
+    left: 2.5rem;
+    top: 20rem;
+  }
+  &__servers{
+    position: absolute;
+    background-color: black;
+    right: 2.5rem;
+    top: 40rem;
+  }
+}

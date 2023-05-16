@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./serverContainer.scss";
 import axios from "axios";
+import TutorialModal from "../TutorialModal/TutorialModal";
 
 export default function ServerContainer({
   servers,
@@ -11,11 +12,16 @@ export default function ServerContainer({
   const [currentServer, setCurrent] = useState();
   const [buttonState, setButton] = useState("<<");
   const [sidebarState, setSidebar] = useState(true);
+  const [modalIsOpen, setModal] = useState(false);
   const sidebar = useRef();
 
   function logoutHandle() {
     console.log("logout clicked");
     login();
+  }
+
+  function tutorialOpen() {
+    setModal(true);
   }
 
   const sidebarHandler = (event) => {
@@ -89,7 +95,9 @@ export default function ServerContainer({
                 </p>
               </div>
               <div className="nav__bar">
-                <div className="help">Getting Started</div>
+                <div className="help" onClick={tutorialOpen}>
+                  Getting Started
+                </div>
                 <div className="logout__button" onClick={logoutHandle}>
                   Log Out
                 </div>
@@ -97,6 +105,7 @@ export default function ServerContainer({
             </div>
           </div>
         </div>
+        <TutorialModal openModal={modalIsOpen} setModal={setModal} />
       </div>
     );
   } else {
@@ -124,13 +133,16 @@ export default function ServerContainer({
               </ul>
             </div>
             <div className="nav__bar">
-              <div className="help">Getting Started</div>
+              <div className="help" onClick={tutorialOpen}>
+                Getting Started
+              </div>
               <div className="logout__button" onClick={logoutHandle}>
                 Log Out
               </div>
             </div>
           </div>
         </div>
+        <TutorialModal openModal={modalIsOpen} setModal={setModal} />
       </div>
     );
   }

@@ -103,6 +103,7 @@ export default function PageContainer() {
           <Link to="/signup" className="login__link">
             {"> "}Signup
           </Link>
+          <div className="cursor">{">"}</div>
         </div>
       </div>
     );
