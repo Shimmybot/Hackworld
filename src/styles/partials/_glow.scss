@@ -1,0 +1,11 @@
+@mixin glowGreen {
+  text-shadow: 0 0 10px #adff2f6e, 0px 0px 5px #adff2f6e;
+}
+
+@mixin glowGreenHover {
+  text-shadow: 0 0 10px #38a83a, 0px 0px 5px rgb(42, 214, 65);
+}
+
+@mixin glowRed {
+  text-shadow: 0 0 10px #adff2f6e, 0px 0px 5px #adff2f6e;
+}

@@ -1,0 +1,43 @@
+@use "../styles/partials/glow" as *;
+
+.signup {
+  &__container {
+    display: flex;
+    justify-content: center;
+    padding: 20rem;
+    background-color: black;
+  }
+  &__card {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    width: 20rem;
+    height: 20rem;
+    justify-content: center;
+    align-items: center;
+  }
+  &__link {
+    padding: 1rem;
+    font-size: 4rem;
+    text-decoration: none;
+    color: #38a83a;
+  }
+  &__field {
+    margin-bottom: 1rem;
+  }
+  &__label {
+    font-size: 2rem;
+    color: #38a83a;
+    @include glowGreen;
+  }
+  &__button {
+    background: black;
+    color: #38a83a;
+    font-size: 1.5rem;
+    @include glowGreen;
+    &:hover {
+      @include glowGreenHover;
+    }
+    border: none;
+  }
+}

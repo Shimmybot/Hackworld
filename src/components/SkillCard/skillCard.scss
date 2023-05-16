@@ -1,0 +1,17 @@
+@use "../../styles/partials/glow" as *;
+.card {
+  background-color: black;
+  margin: 1rem;
+  border: #38a83a 1px solid;
+  width: 15rem;
+  &:hover {
+    @include glowGreenHover;
+  }
+  &--inert {
+    color: red;
+    @include glowRed;
+    margin: 1rem;
+    border: red 1px solid;
+    width: 15rem;
+  }
+}
