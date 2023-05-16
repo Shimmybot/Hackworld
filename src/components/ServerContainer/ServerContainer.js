@@ -107,6 +107,9 @@ export default function ServerContainer({
               })}
             </ul>
           </div>
+          <div className="logout__button" onClick={logoutHandle}>
+            Log Out
+          </div>
         </div>
       </div>
     );

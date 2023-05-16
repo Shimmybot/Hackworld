@@ -39,6 +39,7 @@ export default function SkillContainer({ currentPage, update, level }) {
   };
 
   function addSkill(skill) {
+    console.log("adding");
     axios
       .post(`${serverUrl}/api/users/skills`, skill, {
         headers: {
@@ -46,8 +47,14 @@ export default function SkillContainer({ currentPage, update, level }) {
         },
       })
       .then((result) => {
-        console.log(result);
-        update(true);
+        if (result.status === 200) {
+          console.log("added");
+          console.log(result);
+          update(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
