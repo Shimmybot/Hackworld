@@ -45,7 +45,10 @@ export default function SkillContainer({ currentPage, update, level }) {
           authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
         },
       })
-      .then(update(true));
+      .then((result) => {
+        console.log(result);
+        update(true);
+      });
   }
 
   function openModal() {
