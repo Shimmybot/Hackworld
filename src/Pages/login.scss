@@ -4,7 +4,8 @@
   &__header {
     color: #38a83a;
     width: 25rem;
-    padding: 0 4rem;
+    padding: 0 3rem;
+    font-size: 2rem;
     @include glowGreen;
   }
   &__container {
@@ -13,7 +14,7 @@
     justify-content: center;
     padding: 20rem;
     background-color: black;
-    align-items: center;
+    align-items: first baseline;
   }
   &__card {
     display: flex;
@@ -22,15 +23,18 @@
     width: 25rem;
     height: 25rem;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
   }
   &__link {
     padding: 2rem;
     font-size: 4rem;
     text-decoration: none;
     color: #38a83a;
+    width: 25rem;
     @include glowGreen;
+    &:hover {
+      @include glowGreenHover;
+    }
   }
   &__field {
     margin-bottom: 1rem;

@@ -4,14 +4,12 @@
 .list {
   &__container {
     &--open {
-      display: flex;
-      flex-direction: column;
       background-color: black;
       width: 100%;
       padding: 1.5rem;
       border-radius: 4px;
-      justify-content: space-between;
-      transition: all 0.5s;
+
+      transition: all 1s;
       -webkit-transition: all 0.25s;
     }
     &--closed {
@@ -22,7 +20,10 @@
   }
   &__content {
     &--open {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
     &--closed {
       display: none;
