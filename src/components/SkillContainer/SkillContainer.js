@@ -18,6 +18,7 @@ export default function SkillContainer({ currentPage, update, level }) {
   const [buttonState, setButton] = useState(">>");
   const [sidebarState, setSidebar] = useState(true);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [skillUpdate, setUpdate] = useState(false);
   const sidebar = useRef();
 
   const handleSkill = (event) => {
@@ -40,7 +41,6 @@ export default function SkillContainer({ currentPage, update, level }) {
   };
 
   function addSkill(skill) {
-    console.log("adding");
     axios
       .post(`${serverUrl}/api/users/skills`, skill, {
         headers: {
@@ -52,6 +52,7 @@ export default function SkillContainer({ currentPage, update, level }) {
           console.log("added");
           console.log(result);
           update(true);
+          setUpdate(true);
         }
       })
       .catch((error) => {
@@ -60,7 +61,6 @@ export default function SkillContainer({ currentPage, update, level }) {
   }
 
   function openModal() {
-    console.log("opening Modal");
     setIsOpen(true);
   }
 
@@ -122,6 +122,22 @@ export default function SkillContainer({ currentPage, update, level }) {
         setSkills(tmpSkills);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${serverUrl}/api/users/skills`, {
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
+        },
+      })
+      .then((response) => {
+        const tmpSkills = [skills, ...response.data];
+        tmpSkills.shift();
+        setSkills(tmpSkills);
+        setUpdate(false);
+      });
+  }, [skillUpdate]);
+
   if (skills !== undefined) {
     return (
       <div className="skill__container">
@@ -171,6 +187,7 @@ export default function SkillContainer({ currentPage, update, level }) {
           onRequestClose={closeModel}
           className="skill__modal"
           contentLabel="Skill Modal"
+          ariaHideApp={false}
         >
           <div className="modal__header">
             <h2>Add your skill</h2>
@@ -178,7 +195,12 @@ export default function SkillContainer({ currentPage, update, level }) {
           <div className="modal__content">
             {skillList.map((element) => {
               return (
-                <SkillCard skill={element} click={addSkill} level={level} />
+                <SkillCard
+                  key={element.skill_name}
+                  skill={element}
+                  click={addSkill}
+                  level={level}
+                />
               );
             })}
           </div>
