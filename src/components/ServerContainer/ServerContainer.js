@@ -1,11 +1,21 @@
 import { useEffect, useState, useRef } from "react";
 import "./serverContainer.scss";
 
-export default function ServerContainer({ servers, setServer, currentPage }) {
+export default function ServerContainer({
+  servers,
+  setServer,
+  currentPage,
+  login,
+}) {
   const [currentServer, setCurrent] = useState();
   const [buttonState, setButton] = useState("<<");
   const [sidebarState, setSidebar] = useState(true);
   const sidebar = useRef();
+
+  function logoutHandle() {
+    console.log("logout clicked");
+    login();
+  }
 
   const sidebarHandler = (event) => {
     if (sidebarState) {
@@ -60,11 +70,16 @@ export default function ServerContainer({ servers, setServer, currentPage }) {
               })}
             </ul>
           </div>
-          <div className="servers__current">
-            <h3 className="servers__current--title">Current Server:</h3>
-            <p>Name: {currentServer.server_name}</p>
-            <p>Level: {currentServer.server_level}</p>
-            <p>Health: {currentServer.health}</p>
+          <div className="servers__bottom">
+            <div className="servers__current">
+              <h3 className="servers__current--title">Current Server:</h3>
+              <p>Name: {currentServer.server_name}</p>
+              <p>Level: {currentServer.server_level}</p>
+              <p>Health: {currentServer.health}</p>
+            </div>
+            <div className="logout__button" onClick={logoutHandle}>
+              Log Out
+            </div>
           </div>
         </div>
       </div>

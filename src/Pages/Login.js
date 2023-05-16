@@ -32,7 +32,9 @@ export default function Login() {
         <input name="username" className="login__field" />
         <label className="login__label">{">"}Password</label>
         <input name="password" type="password" className="login__field" />
-        <button type="submit">Login</button>
+        <button className="login__button" type="submit">
+          {">"} Login
+        </button>
       </form>
     </div>
   );

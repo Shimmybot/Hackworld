@@ -32,7 +32,9 @@ export default function Signup() {
         <input name="username" className="signup__field" />
         <label className="signup__label">Password</label>
         <input name="password" type="password" className="signup__field" />
-        <button type="submit">Signup</button>
+        <button className="signup__button" type="submit">
+          {">"} Signup
+        </button>
       </form>
     </div>
   );

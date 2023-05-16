@@ -31,4 +31,18 @@
       @include glowGreenHover;
     }
   }
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.logout__button {
+  border: #38a83a 1px solid;
+  width: 10rem;
+  border-radius: 10px;
+  &:hover {
+    @include glowGreenHover;
+  }
 }

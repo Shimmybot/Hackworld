@@ -12,29 +12,41 @@ export default function PageContainer() {
   const [currentPage, setPage] = useState();
   const [needUpdate, setUpdate] = useState(false);
   const [level, setLevel] = useState(0);
+  const [isLoggedIn, setLogin] = useState(false);
 
   const serverUrl = process.env.REACT_APP_SERVER_URL;
 
   const setServer = (server) => {
     setPage(server);
   };
-
+  function setLogout() {
+    console.log("logout");
+    setLogin(false);
+    sessionStorage.removeItem("loginToken");
+    if (document.getElementById("container")) {
+      document.getElementById("container").style.background = "#000000";
+    }
+    console.log(isLoggedIn);
+  }
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/api/servers`, {
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
-        },
-      })
-      .then((response) => {
-        const newState = response.data;
-        setServers(newState);
-        setPage(response.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+      axios
+        .get(`${serverUrl}/api/servers`, {
+          headers: {
+            authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
+          },
+        })
+        .then((response) => {
+          const newState = response.data;
+          setServers(newState);
+          setPage(response.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const setImg = async () => {
@@ -47,43 +59,44 @@ export default function PageContainer() {
   }, [currentPage, pageImage, needUpdate]);
 
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/api/servers`, {
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
-        },
-      })
-      .then((response) => {
-        const newState = response.data;
-        setServers(newState);
-        let levelAdd = 0;
-        for (let i = 0; i < servers.length; i++) {
-          levelAdd += servers[i].server_level;
-          console.log(levelAdd);
-        }
-        setLevel(levelAdd);
-
-        console.log(servers);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    if (currentPage !== undefined) {
+    if (isLoggedIn) {
       axios
-        .get(`${serverUrl}/api/servers/${currentPage.id}`)
+        .get(`${serverUrl}/api/servers`, {
+          headers: {
+            authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
+          },
+        })
         .then((response) => {
-          console.log(response.data);
-          setPage(response.data[0]);
+          const newState = response.data;
+          setServers(newState);
+          let levelAdd = 0;
+          for (let i = 0; i < servers.length; i++) {
+            levelAdd += servers[i].server_level;
+            console.log(levelAdd);
+          }
+          setLevel(levelAdd);
+
+          console.log(servers);
+        })
+        .catch((error) => {
+          console.log(error);
         });
+      if (currentPage !== undefined) {
+        axios
+          .get(`${serverUrl}/api/servers/${currentPage.id}`)
+          .then((response) => {
+            console.log(response.data);
+            setPage(response.data[0]);
+          });
+      }
     }
     setUpdate(false);
   }, [needUpdate]);
 
-  const update = () => {};
-
-  if (sessionStorage.getItem("loginToken") === null) {
+  if (sessionStorage.getItem("loginToken") === null && !isLoggedIn) {
     return (
       <div className="login__container">
+        <h1 className="login__header">{"> "} Hackworld</h1>
         <div className="login__card">
           <Link to="/login" className="login__link">
             {"> "}Login
@@ -94,26 +107,30 @@ export default function PageContainer() {
         </div>
       </div>
     );
+  } else {
+    if (sessionStorage.getItem("loginToken") !== null && !isLoggedIn) {
+      setLogin(true);
+    }
+    if (document.getElementById("container")) {
+      document.getElementById(
+        "container"
+      ).style.backgroundImage = `url(${pageImage})`;
+    }
+    return (
+      <div id="container" className="game__container">
+        <SkillContainer
+          currentPage={currentPage}
+          update={setUpdate}
+          level={level}
+        />
+        <PlayContainer setServer={setServer} />
+        <ServerContainer
+          servers={servers}
+          currentPage={currentPage}
+          setServer={setServer}
+          login={setLogout}
+        />
+      </div>
+    );
   }
-
-  if (document.getElementById("container")) {
-    document.getElementById(
-      "container"
-    ).style.backgroundImage = `url(${pageImage})`;
-  }
-  return (
-    <div id="container" className="game__container">
-      <SkillContainer
-        currentPage={currentPage}
-        update={setUpdate}
-        level={level}
-      />
-      <PlayContainer setServer={setServer} />
-      <ServerContainer
-        servers={servers}
-        currentPage={currentPage}
-        setServer={setServer}
-      />
-    </div>
-  );
 }
