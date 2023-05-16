@@ -11,7 +11,7 @@ export default function PageContainer() {
   const [pageImage, setImage] = useState("");
   const [currentPage, setPage] = useState();
   const [needUpdate, setUpdate] = useState(false);
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState();
   const [isLoggedIn, setLogin] = useState(false);
 
   const serverUrl = process.env.REACT_APP_SERVER_URL;
@@ -72,11 +72,10 @@ export default function PageContainer() {
           let levelAdd = 0;
           for (let i = 0; i < servers.length; i++) {
             levelAdd += servers[i].server_level;
-            console.log(levelAdd);
+            console.log(typeof servers[i].server_level);
           }
           setLevel(levelAdd);
-
-          console.log(servers);
+          console.log(levelAdd);
         })
         .catch((error) => {
           console.log(error);

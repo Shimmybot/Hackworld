@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./serverContainer.scss";
+import axios from "axios";
 
 export default function ServerContainer({
   servers,
@@ -22,10 +23,13 @@ export default function ServerContainer({
       setButton(">>");
       setSidebar(false);
       sidebar.current.className = "list__container--closed";
+      sidebar.current.firstChild.className = "list__content--closed";
+      console.log(sidebar.current);
     } else {
       setButton("<<");
       setSidebar(true);
       sidebar.current.className = "list__container--open";
+      sidebar.current.firstChild.className = "list__content--open";
     }
   };
 
@@ -54,31 +58,42 @@ export default function ServerContainer({
           {buttonState}
         </div>
         <div className="list__container--open" ref={sidebar}>
-          <div className="servers__owned">
-            <h3 className="servers__owned--title">Owned Servers:</h3>
-            <ul className="servers__list">
-              {servers.map((element) => {
-                return (
-                  <li
-                    key={element.id}
-                    id={element.id}
-                    className="servers__item"
-                  >
-                    <div onClick={clickHandler}>{element.server_name}</div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="servers__bottom">
-            <div className="servers__current">
-              <h3 className="servers__current--title">Current Server:</h3>
-              <p>Name: {currentServer.server_name}</p>
-              <p>Level: {currentServer.server_level}</p>
-              <p>Health: {currentServer.health}</p>
+          <div className="list__content--open">
+            <div className="servers__owned">
+              <h3 className="servers__owned--title">Owned Servers:</h3>
+              <ul className="servers__list">
+                {servers.map((element) => {
+                  return (
+                    <li
+                      key={element.id}
+                      id={element.id}
+                      className="servers__item"
+                    >
+                      <div onClick={clickHandler}>{element.server_name}</div>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-            <div className="logout__button" onClick={logoutHandle}>
-              Log Out
+            <div className="servers__bottom">
+              <div className="servers__current">
+                <h3 className="servers__current--title">Current Server:</h3>
+                <p>
+                  {"> "}Name: {currentServer.server_name}
+                </p>
+                <p>
+                  {"> "}Level: {currentServer.server_level}
+                </p>
+                <p>
+                  {"> "}Health: {currentServer.health}
+                </p>
+              </div>
+              <div className="nav__bar">
+                <div className="help">Getting Started</div>
+                <div className="logout__button" onClick={logoutHandle}>
+                  Log Out
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -91,24 +106,29 @@ export default function ServerContainer({
           {buttonState}
         </div>
         <div className="list__container--open" ref={sidebar}>
-          <div className="servers__owned">
-            <h3 className="servers__owned--title">Owned Servers:</h3>
-            <ul className="servers__list">
-              {servers.map((element) => {
-                return (
-                  <li
-                    key={element.id}
-                    id={element.id}
-                    className="servers__item"
-                  >
-                    <div onClick={clickHandler}>{element.server_name}</div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="logout__button" onClick={logoutHandle}>
-            Log Out
+          <div className="list__content--open">
+            <div className="servers__owned">
+              <h3 className="servers__owned--title">Owned Servers:</h3>
+              <ul className="servers__list">
+                {servers.map((element) => {
+                  return (
+                    <li
+                      key={element.id}
+                      id={element.id}
+                      className="servers__item"
+                    >
+                      <div onClick={clickHandler}>{element.server_name}</div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="nav__bar">
+              <div className="help">Getting Started</div>
+              <div className="logout__button" onClick={logoutHandle}>
+                Log Out
+              </div>
+            </div>
           </div>
         </div>
       </div>

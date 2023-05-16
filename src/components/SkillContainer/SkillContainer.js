@@ -7,7 +7,6 @@ import axios from "axios";
 
 export default function SkillContainer({ currentPage, update, level }) {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
-  const port = process.env.PORT;
   const [skills, setSkills] = useState([]);
   const [skillHover, setHover] = useState({
     skillName: "",
@@ -31,10 +30,12 @@ export default function SkillContainer({ currentPage, update, level }) {
       setButton("<<");
       setSidebar(false);
       sidebar.current.className = "list__container--closed";
+      sidebar.current.firstChild.className = "list__content--closed";
     } else {
       setButton(">>");
       setSidebar(true);
       sidebar.current.className = "list__container--open";
+      sidebar.current.firstChild.className = "list__content--open";
     }
   };
 
@@ -125,38 +126,40 @@ export default function SkillContainer({ currentPage, update, level }) {
     return (
       <div className="skill__container">
         <div className="list__container--open" ref={sidebar}>
-          <div className="skill__top">
-            <h3>Owned Skills:</h3>
-            <ul className="skill__list">
-              {skills.map((element) => {
-                return (
-                  <li key={element.id} className="skill__item">
-                    <div
-                      onClick={handleSkill}
-                      onMouseOver={hoverHandler}
-                      on
-                      onMouseLeave={stopHover}
-                    >
-                      {element.skill_name}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="skill__add" onClick={openModal}>
-              + add skill
+          <div className="list__content--open">
+            <div className="skill__top">
+              <h3>Owned Skills:</h3>
+              <ul className="skill__list">
+                {skills.map((element) => {
+                  return (
+                    <li key={element.id} className="skill__item">
+                      <div
+                        onClick={handleSkill}
+                        onMouseOver={hoverHandler}
+                        on
+                        onMouseLeave={stopHover}
+                      >
+                        {element.skill_name}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="skill__add" onClick={openModal}>
+                + add skill
+              </div>
             </div>
-          </div>
-          <div className="skill__details">
-            <p>
-              {"> "}Name: {skillHover.skill_name}
-            </p>
-            <p>
-              {"> "}Level: {skillHover.skill_level}
-            </p>
-            <p>
-              {"> "}Damage: {skillHover.damage}
-            </p>
+            <div className="skill__details">
+              <p>
+                {"> "}Name: {skillHover.skill_name}
+              </p>
+              <p>
+                {"> "}Level: {skillHover.skill_level}
+              </p>
+              <p>
+                {"> "}Damage: {skillHover.damage}
+              </p>
+            </div>
           </div>
         </div>
         <div className="sidebar__button--right" onClick={sidebarHandler}>

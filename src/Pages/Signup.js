@@ -5,7 +5,6 @@ import "./signup.scss";
 
 export default function Signup() {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
-  const port = process.env.PORT;
   const form = useRef();
   const navigate = useNavigate();
 

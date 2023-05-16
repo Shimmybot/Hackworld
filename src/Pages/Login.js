@@ -5,7 +5,6 @@ import "./login.scss";
 
 export default function Login() {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
-  const port = process.env.PORT;
   const form = useRef();
   const navigate = useNavigate();
   const handleSubmit = (event) => {

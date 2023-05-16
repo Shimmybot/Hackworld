@@ -1,18 +1,32 @@
 @use "../../styles/partials/glow" as *;
 @use "../../styles/partials/sidebar" as *;
 
-.list__container {
-  &--open {
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    width: 100%;
-    padding: 1.5rem;
-    border-radius: 4px;
-    justify-content: space-between;
+.list {
+  &__container {
+    &--open {
+      display: flex;
+      flex-direction: column;
+      background-color: black;
+      width: 100%;
+      padding: 1.5rem;
+      border-radius: 4px;
+      justify-content: space-between;
+      transition: all 0.5s;
+      -webkit-transition: all 0.25s;
+    }
+    &--closed {
+      width: 0;
+      transition: all 0.25s;
+      -webkit-transition: all 0.25s;
+    }
   }
-  &--closed {
-    display: none;
+  &__content {
+    &--open {
+      display: block;
+    }
+    &--closed {
+      display: none;
+    }
   }
 }
 
@@ -28,16 +42,18 @@
     padding: 0.5rem 0;
   }
   &__item {
-    border: #38a83a 1px solid;
+    border: #38a83a 1px dashed;
     border-radius: 10px;
     padding: 0 1rem;
+    text-align: center;
+    margin: 1rem 0;
     &:hover {
       @include glowGreenHover;
     }
   }
   &__add {
     text-align: center;
-    border: #38a83a 1px solid;
+    border: #38a83a 1px dashed;
     border-radius: 10px;
     @include glowGreen;
     &:hover {
@@ -58,13 +74,12 @@
   }
 
   &__details {
+    margin-top: 1rem;
     padding: 1rem;
-    border: #38a83a 1px solid;
+    border: #38a83a 1px dashed;
   }
 }
 .modal {
-  &__header {
-  }
   &__content {
     display: flex;
     flex-wrap: wrap;

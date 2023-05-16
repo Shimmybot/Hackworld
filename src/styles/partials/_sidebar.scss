@@ -11,3 +11,7 @@
   background-color: black;
   border-radius: 10px 0 0 10px;
 }
+
+@mixin close {
+  transition: margin-left 0.5s;
+}

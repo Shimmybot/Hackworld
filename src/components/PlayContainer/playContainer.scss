@@ -11,6 +11,7 @@
   }
   &__input {
     background-color: black;
+    border: #38a83a 1px dashed;
     color: #38a83a;
     @include glowGreen;
     border-radius: 10px;
@@ -23,6 +24,10 @@
     @include glowGreen;
     border-radius: 10px;
     height: 2rem;
+    border: #38a83a 1px dashed;
+    &:hover{
+      @include glowGreenHover
+    }
   }
 }
 .error {
