@@ -8,13 +8,15 @@ export default function PlayContainer({ setServer }) {
   const submitHandler = (event) => {
     event.preventDefault();
     let url = event.target.url.value;
+    if (!url.toLowerCase().includes("www")) {
+      url = "www." + url;
+    }
     if (
       !url.toLowerCase().includes("http://") ||
       !url.toLowerCase().includes("https://")
     ) {
       url = "https://" + url;
     }
-    console.log(serverUrl);
     axios
       .post(`${serverUrl}/api/servers`, { url: url })
       .then((response) => {

@@ -11,6 +11,7 @@ export default function TutorialModal({ openModal, setModal }) {
       onRequestClose={closeModal}
       className="tutorial__modal"
       contentLabel="Tutorial Modal"
+      ariaHideApp={false}
     >
       <h1 className="tutorial__header">Getting Started</h1>
       <div className="tutorial__content">
@@ -52,7 +53,9 @@ export default function TutorialModal({ openModal, setModal }) {
           </p>
           <p>
             {"> "}Creative Commons / Attribution 4.0 International (CC BY 4.0){" "}
-            <a href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a>
+            <a href="https://creativecommons.org/licenses/by/4.0/">
+              https://creativecommons.org/licenses/by/4.0/
+            </a>
           </p>
         </div>
       </div>

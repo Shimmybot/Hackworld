@@ -19,6 +19,7 @@ export default function PageContainer() {
   const setServer = (server) => {
     setPage(server);
   };
+
   function setLogout() {
     console.log("logout");
     setLogin(false);
@@ -28,8 +29,16 @@ export default function PageContainer() {
     }
     console.log(isLoggedIn);
   }
+
+  function calculateLevel() {
+    let levelAdd = 0;
+    for (let i = 0; i < servers.length; i++) {
+      levelAdd += servers[i].server_level;
+    }
+    setLevel(levelAdd);
+  }
+
   useEffect(() => {
-    console.log(isLoggedIn);
     if (isLoggedIn) {
       axios
         .get(`${serverUrl}/api/servers`, {
@@ -41,6 +50,31 @@ export default function PageContainer() {
           const newState = response.data;
           setServers(newState);
           setPage(response.data[0]);
+          calculateLevel();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    calculateLevel();
+  }, [servers]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      axios
+        .get(`${serverUrl}/api/servers`, {
+          headers: {
+            authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
+          },
+        })
+        .then((response) => {
+          const newState = response.data;
+          setServers(newState);
+          setPage(response.data[0]);
+          calculateLevel();
         })
         .catch((error) => {
           console.log(error);
@@ -69,13 +103,7 @@ export default function PageContainer() {
         .then((response) => {
           const newState = response.data;
           setServers(newState);
-          let levelAdd = 0;
-          for (let i = 0; i < servers.length; i++) {
-            levelAdd += servers[i].server_level;
-            console.log(typeof servers[i].server_level);
-          }
-          setLevel(levelAdd);
-          console.log(levelAdd);
+          calculateLevel();
         })
         .catch((error) => {
           console.log(error);
@@ -84,7 +112,6 @@ export default function PageContainer() {
         axios
           .get(`${serverUrl}/api/servers/${currentPage.id}`)
           .then((response) => {
-            console.log(response.data);
             setPage(response.data[0]);
           });
       }
