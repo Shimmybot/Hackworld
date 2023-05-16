@@ -29,7 +29,6 @@ export default function TutorialModal({ openModal, setModal }) {
           </p>
         </div>
         <div className="tutorial__servers">
-          {" "}
           <p>
             {"> "}Once you take over servers they'll appear on the right here
           </p>
@@ -37,6 +36,24 @@ export default function TutorialModal({ openModal, setModal }) {
             {"> "}Be careful though because other players can take them over
           </p>
           <p>{"> "}Enjoy and get hacking!</p>
+        </div>
+        <div className="credits">
+          <p>
+            {"> "}Neon by Scott Buckley |{" "}
+            <a href="https://soundcloud.com/scottbuckley">
+              https://soundcloud.com/scottbuckley
+            </a>
+          </p>
+          <p>
+            {"> "}Music promoted by{" "}
+            <a href=" https://www.free-stock-music.com">
+              https://www.free-stock-music.com
+            </a>
+          </p>
+          <p>
+            {"> "}Creative Commons / Attribution 4.0 International (CC BY 4.0){" "}
+            <a href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a>
+          </p>
         </div>
       </div>
     </Modal>
