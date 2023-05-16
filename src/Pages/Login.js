@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./login.scss";
 
 export default function Login() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const port = process.env.PORT;
   const form = useRef();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
@@ -12,8 +14,9 @@ export default function Login() {
       username: form.current.username.value,
       password: form.current.password.value,
     };
+    console.log(serverUrl);
     axios
-      .post("http://localhost:8080/api/users/login", user)
+      .post(`${serverUrl}/api/users/login`, user)
       .then((response) => {
         sessionStorage.setItem("loginToken", response.data.token);
         navigate("/");

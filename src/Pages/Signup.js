@@ -4,6 +4,8 @@ import axios from "axios";
 import "./signup.scss";
 
 export default function Signup() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const port = process.env.PORT;
   const form = useRef();
   const navigate = useNavigate();
 
@@ -14,7 +16,7 @@ export default function Signup() {
       password: form.current.password.value,
     };
     axios
-      .post("http://localhost:8080/api/users/signup", newUser)
+      .post(`${serverUrl}/api/users/signup`, newUser)
       .then(function (response) {
         console.log(response);
         navigate("/");

@@ -1,5 +1,5 @@
-const skills = [
-  { skill_name: "BruteSSH", skill_level: 1, damage: 10 },
+const skillList = [
+  { skill_name: "BruteSSH", skill_level: 0, damage: 20 },
   {
     skill_name: "FTPCrack",
     skill_level: 20,
@@ -10,6 +10,7 @@ const skills = [
     skill_level: 50,
     damage: 500,
   },
+  { skill_name: "Sanatize Input", skill_level: 75, damage: -50 },
   {
     skill_name: "HTTPworm",
     skill_level: 100,
@@ -22,4 +23,4 @@ const skills = [
   },
 ];
 
-export { skills };
+export { skillList };

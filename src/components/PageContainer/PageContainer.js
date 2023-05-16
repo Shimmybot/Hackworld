@@ -11,6 +11,9 @@ export default function PageContainer() {
   const [pageImage, setImage] = useState("");
   const [currentPage, setPage] = useState();
   const [needUpdate, setUpdate] = useState(false);
+  const [level, setLevel] = useState(0);
+
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
 
   const setServer = (server) => {
     setPage(server);
@@ -18,7 +21,7 @@ export default function PageContainer() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/servers", {
+      .get(`${serverUrl}/api/servers`, {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
         },
@@ -35,7 +38,7 @@ export default function PageContainer() {
 
   useEffect(() => {
     const setImg = async () => {
-      const img = `http://localhost:8080/images/${currentPage.id}.png`;
+      const img = `${serverUrl}/images/${currentPage.id}.png`;
       await setImage(img);
     };
     if (currentPage !== undefined) {
@@ -45,7 +48,7 @@ export default function PageContainer() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/servers", {
+      .get(`${serverUrl}/api/servers`, {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("loginToken")}`,
         },
@@ -53,6 +56,13 @@ export default function PageContainer() {
       .then((response) => {
         const newState = response.data;
         setServers(newState);
+        let levelAdd = 0;
+        for (let i = 0; i < servers.length; i++) {
+          levelAdd += servers[i].server_level;
+          console.log(levelAdd);
+        }
+        setLevel(levelAdd);
+
         console.log(servers);
       })
       .catch((error) => {
@@ -60,7 +70,7 @@ export default function PageContainer() {
       });
     if (currentPage !== undefined) {
       axios
-        .get(`http://localhost:8080/api/servers/${currentPage.id}`)
+        .get(`${serverUrl}/api/servers/${currentPage.id}`)
         .then((response) => {
           console.log(response.data);
           setPage(response.data[0]);
@@ -93,7 +103,11 @@ export default function PageContainer() {
   }
   return (
     <div id="container" className="game__container">
-      <SkillContainer currentPage={currentPage} update={setUpdate} />
+      <SkillContainer
+        currentPage={currentPage}
+        update={setUpdate}
+        level={level}
+      />
       <PlayContainer setServer={setServer} />
       <ServerContainer
         servers={servers}
